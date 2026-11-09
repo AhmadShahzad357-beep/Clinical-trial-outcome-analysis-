@@ -1,0 +1,14 @@
+numpy
+pandas
+scipy
+scikit-learn>=1.9,<1.10
+scikit-survival
+lifelines
+matplotlib
+pyyaml
+joblib
+fastapi
+uvicorn
+pydantic
+httpx
+pytest

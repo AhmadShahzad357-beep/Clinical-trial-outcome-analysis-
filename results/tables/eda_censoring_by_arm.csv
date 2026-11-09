@@ -1,0 +1,5 @@
+arm,n,event,censored,censored_%,median_followup_days,median_followup_censored
+ZDV,532,181,351,66.0,933.5,1033.0
+ZDV+ddI,522,103,419,80.3,1014.0,1063.0
+ZDV+zal,524,109,415,79.2,1012.0,1054.0
+ddI,561,128,433,77.2,1000.0,1052.0

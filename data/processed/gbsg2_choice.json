@@ -1,0 +1,18 @@
+{
+  "chosen": {
+    "Cox": {
+      "alpha": 10
+    },
+    "RSF": {
+      "min_samples_leaf": 30,
+      "max_features": "sqrt"
+    },
+    "GBM": {
+      "n_estimators": 100,
+      "max_depth": 1
+    }
+  },
+  "use_log": true,
+  "tau": 1460,
+  "seed": 42
+}

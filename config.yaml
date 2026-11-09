@@ -1,0 +1,19 @@
+# Project settings. The dashboard (app/main.py) reads this file.
+# The analysis scripts in src/ use the same values as constants (seed 42, horizons below).
+seed: 42
+rmst_horizon:
+  actg175: 900      # days
+  gbsg2: 1460       # days (4 years)
+cv:
+  n_splits: 5
+  n_repeats: 2
+paths:
+  raw: data/raw
+  processed: data/processed
+  tables: results/tables
+  figures: results/figures
+
+# Dashboard links. Fill these in after publishing to GitHub.
+# live_demo_url can also be set with the LIVE_DEMO_URL environment variable.
+live_demo_url: ""
+repo_url: ""

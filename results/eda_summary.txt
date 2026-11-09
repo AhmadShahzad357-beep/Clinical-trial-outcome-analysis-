@@ -1,0 +1,108 @@
+EDA KE NATEEJE (ACTG175)
+============================================================
+
+STEP 1: Outcome
+  - 2139 mareez, 521 par event (24.4%), 1618 censored. Follow-up min 14, median 997, max 1231 din.
+
+STEP 2: Features ka distribution
+  - Skewness: cd80 1.73, preanti 1.19, cd40 0.76, wtkg 0.71, age 0.64. Sirf cd80 aur preanti ki skew 1 se zyada.
+  - preanti: 41% mareez 0 par (zero ka dher).
+  - Binary features mein 1 ka hissa: hemo 8.4%, homo 66.1%, drugs 13.1%, oprior 2.2%, z30 55.0%, zprior 100.0%, race 28.8%, gender 82.8%, str2 58.6%, symptom 17.3%, treat 75.1%.
+  - karnof: sirf 4 values (70: 9, 80: 80, 90: 787, 100: 1263). strat: 1: 886, 2: 410, 3: 843.
+  - Arms: ZDV 532, ZDV+ddI 522, ZDV+zal 524, ddI 561.
+
+STEP 3: Bekaar / duplicate features
+  - zprior: sab 2139 mareezon ki ek hi value (constant). oprior: 97.8% mareezon par 0 (lagbhag constant).
+  - strat se str2 poori tarah tay hota hai: haan. arms se treat poori tarah tay hota hai: haan.
+
+STEP 4: Baseline balance
+  - Sab se bara SMD 0.071 (wtkg). Koi feature 0.1 se upar nahi: arms shuru mein barabar.
+
+STEP 5: Censoring by arm
+  - Event ka hissa: ZDV 34.0%, ZDV+ddI 19.7%, ZDV+zal 20.8%, ddI 22.8% (chi-square p = 3.9e-08).
+  - Censored mareezon ka median follow-up: ZDV 1033, ZDV+ddI 1063, ZDV+zal 1054, ddI 1052 din (sab arms mein qareeb, dropout ka bias nazar nahi aata).
+
+STEP 6: Features ka aapas ka rishta
+  - Sab se mazboot Spearman jore: strat-preanti 0.96, strat-z30 0.85, z30-preanti 0.83, gender-homo 0.61.
+  - Cramer's V ke sab se mazboot jore: strat-z30 0.90, gender-homo 0.61, homo-hemo 0.39.
+  - arms ka kisi bhi feature se sab se bara V 0.011 (randomization theek).
+
+STEP 7: Kaplan-Meier
+  - 900 din par event se bache hue: ZDV 65.0%, ZDV+ddI 81.9%, ZDV+zal 81.7%, ddI 79.8%. Log-rank p: 4 arms 1.2e-10, ZDV vs baqi 5e-12.
+  - cd40: log-rank p = 7.5e-24; event rate pehle group mein 38.5%, aakhri group mein 14.7%
+  - cd80: log-rank p = 0.018; event rate pehle group mein 21.5%, aakhri group mein 29.5%
+  - preanti: log-rank p = 1.1e-06; event rate pehle group mein 18.0%, aakhri group mein 32.4%
+  - karnof: log-rank p = 2.3e-06; event rate pehle group mein 38.2%, aakhri group mein 21.1%
+  - age: log-rank p = 0.15; event rate pehle group mein 22.2%, aakhri group mein 28.7%
+  - wtkg: log-rank p = 0.59; event rate pehle group mein 23.2%, aakhri group mein 26.1%
+
+STEP 8: Binary features ka event rate (feature = 1 minus feature = 0, point mein)
+  - symptom +14.7, oprior +12.1, z30 +10.8, gender +5.1, homo +4.9, hemo -1.7, race -5.3, drugs -6.3. (oprior mein sirf 47 mareez.)
+
+STEP 9: Treatment ka asar subgroups mein
+  - Sab mareez: HR 0.53 (0.45 - 0.64). Subgroups mein HR 0.46 se 0.70, sab 1 se neeche (doosre treatments ki taraf).
+  - Jahan 95% daira 1 ko chhuta hai: symptom = 1 (n=370, HR 0.70), gender = 0 (n=368, HR 0.66), drugs = 1 (n=281, HR 0.57). Yeh chhote groups hain jahan events kam hain.
+  - karnof = 100 mein HR 0.46 aur karnof < 100 mein 0.64: halka ishara, daire aapas mein milte hain.
+
+STEP 10: Patterns
+  - cd40 (deciles): event rate 45.4% se girta hai 14.1% tak. cd80: 19.2% se 29.9% tak.
+  - preanti: event rate 18.0% (0 din) se 32.4% (730+ din) tak barhta hai.
+  - age aur wtkg ke deciles mein sirf halka utar chadhao (shor jaisa).
+  - cd40 aur cd80 ka Spearman rishta 0.23 (halka).
+
+PEHLE KE CHECKS (cleaning, linearity, outliers)
+  - Missing values: koi nahi (cd496 hatane ke baad). Hatayi gayi columns: cd496, cd420, cd820, r, offtrt, pidnum.
+  - Linearity (martingale residual graph): cd40 mein mor nazar aaya; age, wtkg, preanti, cd80 taqriban seedhe.
+  - Outliers (IQR rule): age 2.4%, wtkg 2.5%, preanti 0.6%, cd40 1.4%, cd80 3.3%. Asli clinical values lagti hain.
+
+
+FEATURE ENGINEERING MEIN TAY KARNE WALI CHEEZEIN
+============================================================
+
+1. zprior, str2
+   EDA ne dikhaya: zprior constant hai; str2 strat se poori tarah tay hota hai.
+   Feature engineering mein: Dono ko hatana.
+
+2. arms, treat
+   EDA ne dikhaya: arms se treat khud nikalta hai; treatment features (X) ka hissa nahi.
+   Feature engineering mein: Treatment column alag rakhna. arms rakhein (4 arms), treat usi se nikal sakta hai.
+
+3. strat, preanti, z30
+   EDA ne dikhaya: strat-preanti r = 0.96, z30-preanti r = 0.83: teeno ek hi baat dohra rahe hain.
+   Feature engineering mein: Inmein se ek ya do rakhna.
+
+4. oprior
+   EDA ne dikhaya: Sirf 47 mareez (2.2%) par 1.
+   Feature engineering mein: Rakhna ya hatana tay karna.
+
+5. preanti
+   EDA ne dikhaya: 41% mareez 0 par, skew 1.19.
+   Feature engineering mein: log1p dekhna (ya 0 / >0 flag).
+
+6. cd80
+   EDA ne dikhaya: skew 1.73, sab se zyada jhuka hua.
+   Feature engineering mein: log1p transform dekhna.
+
+7. cd40
+   EDA ne dikhaya: Linearity graph mein mor; event rate shuru mein tezi se girta hai phir chapta hota hai; cd40 = 0 bhi hai.
+   Feature engineering mein: log1p ya spline dekhna (log nahi, zero ki wajah se).
+
+8. karnof
+   EDA ne dikhaya: Sirf 4 values; 70 par sirf 9 mareez, 70 aur 80 milakar 89.
+   Feature engineering mein: Categories banana: 70-80, 90, 100.
+
+9. age, wtkg, binary features
+   EDA ne dikhaya: Skew 1 se kam, koi masla nahi.
+   Feature engineering mein: Jaisa hai rakhna.
+
+10. Outliers
+   EDA ne dikhaya: Sab features mein 3.3% se kam, asli values.
+   Feature engineering mein: Rakhna, hatana nahi.
+
+11. Missing values
+   EDA ne dikhaya: Koi nahi.
+   Feature engineering mein: Imputation ki zaroorat nahi.
+
+12. Qaida (hamesha)
+   EDA ne dikhaya: Poore data par seekhne se leakage hoti hai.
+   Feature engineering mein: Transform aur scaling sirf cross-validation ke training fold ke andar seekhna.

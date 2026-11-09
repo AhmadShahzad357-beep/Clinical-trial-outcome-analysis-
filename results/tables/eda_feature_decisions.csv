@@ -1,0 +1,13 @@
+﻿feature,eda_ne_kya_dikhaya,feature_engineering_mein_kya_karna
+"zprior, str2",zprior constant hai; str2 strat se poori tarah tay hota hai.,Dono ko hatana.
+"arms, treat",arms se treat khud nikalta hai; treatment features (X) ka hissa nahi.,"Treatment column alag rakhna. arms rakhein (4 arms), treat usi se nikal sakta hai."
+"strat, preanti, z30","strat-preanti r = 0.96, z30-preanti r = 0.83: teeno ek hi baat dohra rahe hain.",Inmein se ek ya do rakhna.
+oprior,Sirf 47 mareez (2.2%) par 1.,Rakhna ya hatana tay karna.
+preanti,"41% mareez 0 par, skew 1.19.",log1p dekhna (ya 0 / >0 flag).
+cd80,"skew 1.73, sab se zyada jhuka hua.",log1p transform dekhna.
+cd40,Linearity graph mein mor; event rate shuru mein tezi se girta hai phir chapta hota hai; cd40 = 0 bhi hai.,"log1p ya spline dekhna (log nahi, zero ki wajah se)."
+karnof,"Sirf 4 values; 70 par sirf 9 mareez, 70 aur 80 milakar 89.","Categories banana: 70-80, 90, 100."
+"age, wtkg, binary features","Skew 1 se kam, koi masla nahi.",Jaisa hai rakhna.
+Outliers,"Sab features mein 3.3% se kam, asli values.","Rakhna, hatana nahi."
+Missing values,Koi nahi.,Imputation ki zaroorat nahi.
+Qaida (hamesha),Poore data par seekhne se leakage hoti hai.,Transform aur scaling sirf cross-validation ke training fold ke andar seekhna.

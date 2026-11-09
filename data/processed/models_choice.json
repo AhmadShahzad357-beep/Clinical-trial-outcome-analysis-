@@ -1,0 +1,20 @@
+{
+  "chosen": {
+    "Cox": {
+      "alpha": 10
+    },
+    "RSF": {
+      "min_samples_leaf": 60,
+      "max_features": "sqrt"
+    },
+    "GBM": {
+      "n_estimators": 200,
+      "max_depth": 1
+    }
+  },
+  "use_treatment": true,
+  "cv_splits": 5,
+  "cv_repeats": 2,
+  "simplest_within_1se": "Cox",
+  "best_cv": "Cox"
+}

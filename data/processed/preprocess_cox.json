@@ -1,0 +1,105 @@
+{
+  "variant": "A",
+  "variant_text": "sirf scaling (koi transform nahi)",
+  "seed": 42,
+  "test_size": 0.2,
+  "dropped_always": [
+    "zprior",
+    "str2"
+  ],
+  "dropped_overlap": [
+    "strat"
+  ],
+  "dropped_cox_only": [
+    "oprior"
+  ],
+  "karnof_mode": "onehot",
+  "preprocessor": {
+    "log_cols": [],
+    "cd40_mode": "none",
+    "cap_q": null,
+    "n_knots": 3,
+    "drop_cols": [
+      "oprior"
+    ],
+    "scale": true,
+    "caps": {},
+    "knots": [],
+    "mean": {
+      "age": 35.317358270017536,
+      "wtkg": 75.31539408533021,
+      "preanti": 378.6826417299825,
+      "cd40": 352.93220338983053,
+      "cd80": 985.7971946230275
+    },
+    "std": {
+      "age": 8.714668987276054,
+      "wtkg": 13.476449060046289,
+      "preanti": 473.38267071848236,
+      "cd40": 118.46713876197232,
+      "cd80": 476.6968183139156
+    }
+  },
+  "cv": {
+    "A": {
+      "cindex": [
+        0.6567,
+        0.0124
+      ],
+      "loglik": [
+        -1.3245,
+        0.0109
+      ]
+    },
+    "B": {
+      "cindex": [
+        0.6528,
+        0.01
+      ],
+      "loglik": [
+        -1.3263,
+        0.0099
+      ]
+    },
+    "C": {
+      "cindex": [
+        0.6382,
+        0.0112
+      ],
+      "loglik": [
+        -1.4408,
+        0.0978
+      ]
+    },
+    "E": {
+      "cindex": [
+        0.6376,
+        0.0111
+      ],
+      "loglik": [
+        -1.4412,
+        0.0979
+      ]
+    },
+    "D": {
+      "cindex": [
+        0.6562,
+        0.0106
+      ],
+      "loglik": [
+        -1.3241,
+        0.01
+      ]
+    },
+    "F": {
+      "cindex": [
+        0.6559,
+        0.0107
+      ],
+      "loglik": [
+        -1.3243,
+        0.01
+      ]
+    }
+  }
+}

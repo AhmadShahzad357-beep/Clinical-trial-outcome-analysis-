@@ -1,0 +1,4 @@
+model,C_harrell,C_uno,AUC_900,IBS,IBS_skill,C_harrell_95%
+Cox (ridge),0.6758,0.675,0.6784,0.0884,0.0891,0.620 - 0.725
+Random Survival Forest,0.6435,0.6445,0.645,0.092,0.052,0.585 - 0.692
+Gradient Boosting,0.6364,0.6392,0.6398,0.0902,0.0707,0.580 - 0.685
