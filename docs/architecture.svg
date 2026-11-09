@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="440" rx="14" fill="#ffffff" stroke="#e2e8f0"/>
+  <text x="600" y="34" text-anchor="middle" font-size="18" font-weight="700" fill="#0f172a">Pipeline architecture</text>
+
+  <g stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#ar)">
+    <path d="M140 182H170"/>
+    <path d="M300 182H330"/>
+    <path d="M440 182H470"/>
+    <path d="M610 182H630V92H650"/>
+    <path d="M610 182H650"/>
+    <path d="M610 182H630V272H650"/>
+    <path d="M820 272H850"/>
+    <path d="M820 182H1010"/>
+    <path d="M820 92H1010V150"/>
+    <path d="M990 272H1010V214"/>
+    <path d="M1010 182H1030"/>
+  </g>
+
+  <g font-size="13" text-anchor="middle">
+    <rect x="20" y="150" width="120" height="64" rx="10" fill="#f1f5f9" stroke="#94a3b8"/>
+    <text x="80" y="177" font-weight="700" fill="#0f172a">Raw data</text>
+    <text x="80" y="196" font-size="11.5" fill="#475569">ACTG 175, GBSG2</text>
+
+    <rect x="170" y="150" width="130" height="64" rx="10" fill="#e8eefc" stroke="#2f5d8a"/>
+    <text x="235" y="177" font-weight="700" fill="#0f172a">Clean and audit</text>
+    <text x="235" y="196" font-size="11.5" fill="#475569">cleaning.py</text>
+
+    <rect x="330" y="150" width="110" height="64" rx="10" fill="#e8eefc" stroke="#2f5d8a"/>
+    <text x="385" y="177" font-weight="700" fill="#0f172a">EDA</text>
+    <text x="385" y="196" font-size="11.5" fill="#475569">eda.py</text>
+
+    <rect x="470" y="150" width="140" height="64" rx="10" fill="#e8eefc" stroke="#2f5d8a"/>
+    <text x="540" y="172" font-weight="700" fill="#0f172a">Feature engineering</text>
+    <text x="540" y="190" font-size="11.5" fill="#475569">features.py</text>
+    <text x="540" y="205" font-size="11" fill="#475569">train / test split</text>
+
+    <rect x="650" y="60" width="170" height="64" rx="10" fill="#e6f4f1" stroke="#0f766e"/>
+    <text x="735" y="87" font-weight="700" fill="#0f172a">Treatment effect</text>
+    <text x="735" y="106" font-size="11.5" fill="#475569">effects.py: HR, RMST, NNT</text>
+
+    <rect x="650" y="150" width="170" height="64" rx="10" fill="#e6f4f1" stroke="#0f766e"/>
+    <text x="735" y="177" font-weight="700" fill="#0f172a">Prediction models</text>
+    <text x="735" y="196" font-size="11.5" fill="#475569">models.py: Cox, RSF, GBM</text>
+
+    <rect x="650" y="240" width="170" height="64" rx="10" fill="#e6f4f1" stroke="#0f766e"/>
+    <text x="735" y="267" font-weight="700" fill="#0f172a">Heterogeneity</text>
+    <text x="735" y="286" font-size="11.5" fill="#475569">cate.py: 5 CATE learners</text>
+
+    <rect x="850" y="240" width="140" height="64" rx="10" fill="#fdf3e3" stroke="#b45309"/>
+    <text x="920" y="267" font-weight="700" fill="#0f172a">Validation</text>
+    <text x="920" y="286" font-size="11.5" fill="#475569">validation.py</text>
+
+    <rect x="1030" y="140" width="150" height="84" rx="10" fill="#0f172a" stroke="#0f172a"/>
+    <text x="1105" y="168" font-weight="700" fill="#ffffff">FastAPI dashboard</text>
+    <text x="1105" y="187" font-size="11.5" fill="#cbd5e1">app/main.py</text>
+    <text x="1105" y="204" font-size="11.5" fill="#cbd5e1">predictor.py</text>
+  </g>
+
+  <rect x="170" y="344" width="820" height="56" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-dasharray="6 5"/>
+  <text x="580" y="368" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">Replication on a second trial</text>
+  <text x="580" y="387" text-anchor="middle" font-size="11.5" fill="#475569">gbsg2.py runs the same protocol on GBSG2: propensity-adjusted effects, models, CATE and validation</text>
+  <path d="M580 304V344" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4" fill="none"/>
+
+  <text x="600" y="426" text-anchor="middle" font-size="11.5" fill="#64748b">Test data is opened once, after all choices are fixed on the training split.</text>
+</svg>
