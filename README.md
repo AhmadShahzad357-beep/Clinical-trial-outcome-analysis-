@@ -4,10 +4,6 @@
   <a href="https://clinical-trial-outcome-analysis.vercel.app"><img alt="Live demo" src="https://img.shields.io/badge/%E2%96%B6%20Live%20demo-open%20the%20dashboard-0f766e?style=for-the-badge"></a>
 </p>
 
-<p align="center">
-  <a href="https://clinical-trial-outcome-analysis.vercel.app"><img src="docs/images/dashboard_overview.png" alt="Dashboard preview" width="90%"></a>
-</p>
-
 ## 🔭 Overview
 
 Clinical trials usually report one number: the **average** effect of a treatment. This project goes further, on
@@ -24,7 +20,7 @@ Clinical trials usually report one number: the **average** effect of a treatment
 The same protocol is run on two trials, **ACTG 175** (HIV, four treatment arms) and **GBSG2** (breast cancer,
 hormonal therapy), so conclusions are not tied to a single dataset.
 
-The results are served through an interactive **FastAPI dashboard** that also contains a patient-level **survival prediction tool** (see [Dashboard](#-dashboard)).
+The results are served through an interactive **FastAPI dashboard** that also contains a patient-level **survival prediction tool**.
 
 ---
 
@@ -81,29 +77,10 @@ behaves consistently across two trials.
 
 > The test data is opened once, after every choice is fixed on the training split.
 
-| Stage | Script | What it does | Main outputs |
-|---|---|---|---|
-| Clean and audit | `src/cleaning.py` | Missing-value audit, removal of ID and post-randomization columns, linearity and outlier checks | `data/processed/actg175_clean.csv` |
-| EDA | `src/eda.py` | Outcome, distributions, baseline balance, censoring by arm, Kaplan-Meier, correlations, patterns, one-page summary | `results/figures/eda_*.png`, `results/eda_summary.txt` |
-| Feature engineering | `src/features.py` | Stratified train/test split, encoding, VIF check, transform and scaling chosen by cross-validation | `data/processed/X_*`, `y_*`, `treatment_*` |
-| Treatment effect | `src/effects.py` | Kaplan-Meier, Cox hazard ratios, proportional-hazards check, RMST, NNT with bootstrap intervals | `results/figures/effects_1_summary.png` |
-| Prediction | `src/models.py` | Cox vs RSF vs GBM, small tuning grids, cross-validation, one-time test evaluation | `results/figures/models_1_comparison.png` |
-| Heterogeneity | `src/cate.py` | Five CATE learners with cross-fitting | `data/processed/cate_*.csv` |
-| Validation | `src/validation.py` | Constant-effect baseline, calibration slope, global null, test check | `results/figures/validation_1_summary.png` |
-| Replication | `src/gbsg2.py` | The whole protocol on GBSG2 with propensity-adjusted effects | `results/figures/gbsg2_*.png` |
 
 ---
 
 ## 🖥 Dashboard
-
-<p align="center">
-  <a href="https://clinical-trial-outcome-analysis.vercel.app"><img alt="Live demo" src="https://img.shields.io/badge/%E2%96%B6%20Live%20demo-open%20the%20dashboard-0f766e?style=for-the-badge"></a>
-</p>
-
-A single-page web dashboard built with **FastAPI** (backend) and plain HTML, CSS and JavaScript (frontend). It reads the
-tables produced by the analysis scripts and adds a prediction endpoint. It supports light and dark themes and works on phones.
-The same dashboard also runs as a **static site** (no server): results are pre-exported to JSON and the patient predictor
-runs in the browser, which is how the live demo is hosted.
 
 <p align="center">
   <img src="docs/images/dashboard_overview.png" alt="Overview page with headline numbers, Kaplan-Meier curves and key findings" width="90%">
@@ -120,68 +97,6 @@ runs in the browser, which is how the live demo is hosted.
 <p align="center">
   <img src="docs/images/dashboard_predictor.png" alt="Patient predictor with predicted event-free curves" width="90%">
 </p>
-
-| Page | What it shows |
-|---|---|
-| Overview | Headline numbers, Kaplan-Meier curves for both trials, key findings |
-| Treatment effect | Days gained (RMST) with intervals, event-free percentages, hazard ratios, NNT, subgroup forest plot |
-| Prediction models | Cox vs Random Survival Forest vs Gradient Boosting: cross-validation, test set, tuning grid, metric glossary |
-| Heterogeneity | Patient-level effect ranges and the validation against a constant-effect baseline, with the verdict |
-| Patient predictor | Enter a patient profile (ACTG 175 or GBSG2) and get the predicted event-free probability under each treatment, with curves |
-| Figures | Gallery of every plot produced by the pipeline |
-
-### Run it
-
-From the project folder (after the analysis scripts have produced `results/` and `data/processed/`, which are already included):
-
-```bash
-pip install -r requirements.txt
-uvicorn app.main:app --reload
-```
-
-Open `http://127.0.0.1:8000`. Interactive API documentation is at `http://127.0.0.1:8000/docs`.
-On the first start the prediction models are trained from the saved training split (a few seconds) and cached in `models/`.
-
-### Deploy the live demo (Vercel)
-
-Vercel hosts the dashboard as a static site. The Python stack (scikit-survival, lifelines) is far too large for a
-serverless function, so the site is **pre-built** instead: `scripts/build_web.py` writes everything the page needs into `web/`.
-
-```bash
-python scripts/build_web.py        # rebuilds web/ (only needed after the analysis results change)
-```
-
-1. Push the repository to GitHub (the `web/` folder is committed).
-2. On [vercel.com](https://vercel.com) choose **Add New, Project** and import the repository.
-3. Set **Root Directory** to `web`, **Framework Preset** to `Other`, and leave the build command and output directory empty.
-4. Deploy. Name the project `clinical-trial-outcome-analysis` to get the address used by the badges above, or replace that
-   address in this README and in `live_demo_url` of `config.yaml`.
-
-The **Live demo** button in the dashboard header opens the deployed site. On the hosted site it works automatically; when
-running locally it uses `live_demo_url` from `config.yaml` (or the `LIVE_DEMO_URL` environment variable).
-
-### API
-
-| Method and path | Returns |
-|---|---|
-| `GET /api/overview` | Trial sizes, events, headline effect and test C-index |
-| `GET /api/km` | Kaplan-Meier curves for both trials |
-| `GET /api/effects` | Treatment effect table, pairwise tests, censoring, subgroup hazard ratios |
-| `GET /api/models` | Cross-validation, test and tuning results |
-| `GET /api/heterogeneity` | CATE summaries and validation results |
-| `POST /api/predict/actg175` | Predicted event-free probability at 900 days for the four arms |
-| `POST /api/predict/gbsg2` | Predicted recurrence-free probability at 1,460 days with and without hormonal therapy |
-
-Example:
-
-```bash
-curl -X POST http://127.0.0.1:8000/api/predict/actg175 -H "Content-Type: application/json" \
-     -d '{"age": 35, "cd40": 340, "cd80": 890, "karnof": 90}'
-```
-
-> **Prediction is a research demonstration.** The models are trained on public teaching copies of two trials.
-> The treatment difference shown for one patient is the model estimate only, because the validation stage found no
-> reliable evidence of patient-level treatment differences. It is not clinical decision support.
 
 ---
 
