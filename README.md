@@ -1,5 +1,13 @@
 # Clinical Trial Outcome Analysis
 
+<p align="center">
+  <a href="https://clinical-trial-outcome-analysis.vercel.app"><img alt="Live demo" src="https://img.shields.io/badge/%E2%96%B6%20Live%20demo-open%20the%20dashboard-0f766e?style=for-the-badge"></a>
+</p>
+
+<p align="center">
+  <a href="https://clinical-trial-outcome-analysis.vercel.app"><img src="docs/images/dashboard_overview.png" alt="Dashboard preview" width="90%"></a>
+</p>
+
 ## 🔭 Overview
 
 Clinical trials usually report one number: the **average** effect of a treatment. This project goes further, on
@@ -68,8 +76,10 @@ behaves consistently across two trials.
 ## 🏗 Architecture
 
 <p align="center">
-  <img src="docs/architecture.svg" alt="Pipeline architecture" width="100%">
+  <img src="docs/architecture.svg" alt="Animated pipeline architecture" width="100%">
 </p>
+
+> The test data is opened once, after every choice is fixed on the training split.
 
 | Stage | Script | What it does | Main outputs |
 |---|---|---|---|
@@ -87,23 +97,28 @@ behaves consistently across two trials.
 ## 🖥 Dashboard
 
 <p align="center">
-  <!-- TODO: replace # with the live demo URL after publishing to GitHub (also set live_demo_url in config.yaml) -->
-  <a href="#"><img alt="Live demo" src="https://img.shields.io/badge/%E2%96%B6%20Live%20demo-open%20the%20dashboard-0f766e?style=for-the-badge"></a>
+  <a href="https://clinical-trial-outcome-analysis.vercel.app"><img alt="Live demo" src="https://img.shields.io/badge/%E2%96%B6%20Live%20demo-open%20the%20dashboard-0f766e?style=for-the-badge"></a>
 </p>
 
 A single-page web dashboard built with **FastAPI** (backend) and plain HTML, CSS and JavaScript (frontend). It reads the
 tables produced by the analysis scripts and adds a prediction endpoint. It supports light and dark themes and works on phones.
+The same dashboard also runs as a **static site** (no server): results are pre-exported to JSON and the patient predictor
+runs in the browser, which is how the live demo is hosted.
 
 <p align="center">
-  <img src="docs/images/dashboard_overview.png" alt="Dashboard overview" width="90%">
+  <img src="docs/images/dashboard_overview.png" alt="Overview page with headline numbers, Kaplan-Meier curves and key findings" width="90%">
 </p>
 <p align="center">
-  <img src="docs/images/dashboard_treatment_effect.png" alt="Treatment effect view" width="45%">
-  <img src="docs/images/dashboard_models.png" alt="Prediction models view" width="45%">
+  <img src="docs/images/dashboard_treatment_effect.png" alt="Treatment effect page: days gained, event-free percentage and effect size table" width="90%">
 </p>
 <p align="center">
-  <img src="docs/images/dashboard_heterogeneity.png" alt="Heterogeneity view" width="45%">
-  <img src="docs/images/dashboard_predictor.png" alt="Patient predictor" width="45%">
+  <img src="docs/images/dashboard_heterogeneity.png" alt="Heterogeneity page: patient-level effect estimates and validation" width="90%">
+</p>
+<p align="center">
+  <img src="docs/images/dashboard_models.png" alt="Prediction models page: C-index for Cox, Random Survival Forest and Gradient Boosting" width="90%">
+</p>
+<p align="center">
+  <img src="docs/images/dashboard_predictor.png" alt="Patient predictor with predicted event-free curves" width="90%">
 </p>
 
 | Page | What it shows |
@@ -126,6 +141,24 @@ uvicorn app.main:app --reload
 
 Open `http://127.0.0.1:8000`. Interactive API documentation is at `http://127.0.0.1:8000/docs`.
 On the first start the prediction models are trained from the saved training split (a few seconds) and cached in `models/`.
+
+### Deploy the live demo (Vercel)
+
+Vercel hosts the dashboard as a static site. The Python stack (scikit-survival, lifelines) is far too large for a
+serverless function, so the site is **pre-built** instead: `scripts/build_web.py` writes everything the page needs into `web/`.
+
+```bash
+python scripts/build_web.py        # rebuilds web/ (only needed after the analysis results change)
+```
+
+1. Push the repository to GitHub (the `web/` folder is committed).
+2. On [vercel.com](https://vercel.com) choose **Add New, Project** and import the repository.
+3. Set **Root Directory** to `web`, **Framework Preset** to `Other`, and leave the build command and output directory empty.
+4. Deploy. Name the project `clinical-trial-outcome-analysis` to get the address used by the badges above, or replace that
+   address in this README and in `live_demo_url` of `config.yaml`.
+
+The **Live demo** button in the dashboard header opens the deployed site. On the hosted site it works automatically; when
+running locally it uses `live_demo_url` from `config.yaml` (or the `LIVE_DEMO_URL` environment variable).
 
 ### API
 

@@ -1,70 +1,163 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440" width="1200" height="440" font-family="Segoe UI, Helvetica, Arial, sans-serif">
-  <defs>
-    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0 0L10 5L0 10z" fill="#64748b"/>
-    </marker>
-  </defs>
-  <rect width="1200" height="440" rx="14" fill="#ffffff" stroke="#e2e8f0"/>
-  <text x="600" y="34" text-anchor="middle" font-size="18" font-weight="700" fill="#0f172a">Pipeline architecture</text>
-
-  <g stroke="#64748b" stroke-width="1.8" fill="none" marker-end="url(#ar)">
-    <path d="M140 182H170"/>
-    <path d="M300 182H330"/>
-    <path d="M440 182H470"/>
-    <path d="M610 182H630V92H650"/>
-    <path d="M610 182H650"/>
-    <path d="M610 182H630V272H650"/>
-    <path d="M820 272H850"/>
-    <path d="M820 182H1010"/>
-    <path d="M820 92H1010V150"/>
-    <path d="M990 272H1010V214"/>
-    <path d="M1010 182H1030"/>
-  </g>
-
-  <g font-size="13" text-anchor="middle">
-    <rect x="20" y="150" width="120" height="64" rx="10" fill="#f1f5f9" stroke="#94a3b8"/>
-    <text x="80" y="177" font-weight="700" fill="#0f172a">Raw data</text>
-    <text x="80" y="196" font-size="11.5" fill="#475569">ACTG 175, GBSG2</text>
-
-    <rect x="170" y="150" width="130" height="64" rx="10" fill="#e8eefc" stroke="#2f5d8a"/>
-    <text x="235" y="177" font-weight="700" fill="#0f172a">Clean and audit</text>
-    <text x="235" y="196" font-size="11.5" fill="#475569">cleaning.py</text>
-
-    <rect x="330" y="150" width="110" height="64" rx="10" fill="#e8eefc" stroke="#2f5d8a"/>
-    <text x="385" y="177" font-weight="700" fill="#0f172a">EDA</text>
-    <text x="385" y="196" font-size="11.5" fill="#475569">eda.py</text>
-
-    <rect x="470" y="150" width="140" height="64" rx="10" fill="#e8eefc" stroke="#2f5d8a"/>
-    <text x="540" y="172" font-weight="700" fill="#0f172a">Feature engineering</text>
-    <text x="540" y="190" font-size="11.5" fill="#475569">features.py</text>
-    <text x="540" y="205" font-size="11" fill="#475569">train / test split</text>
-
-    <rect x="650" y="60" width="170" height="64" rx="10" fill="#e6f4f1" stroke="#0f766e"/>
-    <text x="735" y="87" font-weight="700" fill="#0f172a">Treatment effect</text>
-    <text x="735" y="106" font-size="11.5" fill="#475569">effects.py: HR, RMST, NNT</text>
-
-    <rect x="650" y="150" width="170" height="64" rx="10" fill="#e6f4f1" stroke="#0f766e"/>
-    <text x="735" y="177" font-weight="700" fill="#0f172a">Prediction models</text>
-    <text x="735" y="196" font-size="11.5" fill="#475569">models.py: Cox, RSF, GBM</text>
-
-    <rect x="650" y="240" width="170" height="64" rx="10" fill="#e6f4f1" stroke="#0f766e"/>
-    <text x="735" y="267" font-weight="700" fill="#0f172a">Heterogeneity</text>
-    <text x="735" y="286" font-size="11.5" fill="#475569">cate.py: 5 CATE learners</text>
-
-    <rect x="850" y="240" width="140" height="64" rx="10" fill="#fdf3e3" stroke="#b45309"/>
-    <text x="920" y="267" font-weight="700" fill="#0f172a">Validation</text>
-    <text x="920" y="286" font-size="11.5" fill="#475569">validation.py</text>
-
-    <rect x="1030" y="140" width="150" height="84" rx="10" fill="#0f172a" stroke="#0f172a"/>
-    <text x="1105" y="168" font-weight="700" fill="#ffffff">FastAPI dashboard</text>
-    <text x="1105" y="187" font-size="11.5" fill="#cbd5e1">app/main.py</text>
-    <text x="1105" y="204" font-size="11.5" fill="#cbd5e1">predictor.py</text>
-  </g>
-
-  <rect x="170" y="344" width="820" height="56" rx="10" fill="#f8fafc" stroke="#94a3b8" stroke-dasharray="6 5"/>
-  <text x="580" y="368" text-anchor="middle" font-size="13" font-weight="700" fill="#0f172a">Replication on a second trial</text>
-  <text x="580" y="387" text-anchor="middle" font-size="11.5" fill="#475569">gbsg2.py runs the same protocol on GBSG2: propensity-adjusted effects, models, CATE and validation</text>
-  <path d="M580 304V344" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 4" fill="none"/>
-
-  <text x="600" y="426" text-anchor="middle" font-size="11.5" fill="#64748b">Test data is opened once, after all choices are fixed on the training split.</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1420 610" width="1420" height="610" role="img" aria-labelledby="t d" font-family="Segoe UI, Inter, Helvetica, Arial, sans-serif">
+<title id="t">Pipeline architecture</title><desc id="d">Raw data is cleaned, split into train and test, analysed for treatment effect, prediction and heterogeneity, validated, and served by a dashboard. The same protocol is replicated on GBSG2.</desc>
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0b1526"/><stop offset="1" stop-color="#10243a"/></linearGradient>
+<linearGradient id="acc" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2dd4bf"/><stop offset="1" stop-color="#38bdf8"/></linearGradient>
+<linearGradient id="dash" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f766e"/><stop offset="1" stop-color="#155e75"/></linearGradient>
+<filter id="sh" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000" flood-opacity=".35"/></filter>
+<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 1L9 5L0 9z" fill="#5eead4"/></marker>
+<style>
+.node{animation:in .7s ease-out backwards}
+.edge{fill:none;stroke:#5eead4;stroke-width:2;stroke-opacity:.85;stroke-dasharray:7 7;animation:flow 1.1s linear infinite}
+.base{fill:none;stroke:#1e3a52;stroke-width:5;stroke-linecap:round}
+.pulse{animation:pulse 2.6s ease-in-out infinite;transform-box:fill-box;transform-origin:center}
+.ring{animation:ring 2.6s ease-out infinite;transform-box:fill-box;transform-origin:center}
+.band{stroke-dasharray:6 6;animation:flow 2.4s linear infinite}
+@keyframes in{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+@keyframes flow{to{stroke-dashoffset:-14}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.025)}}
+@keyframes ring{0%{opacity:.55;transform:scale(1)}100%{opacity:0;transform:scale(1.08)}}
+@media (prefers-reduced-motion:reduce){.node{animation:none}.edge,.band,.pulse,.ring{animation:none}}
+</style>
+</defs>
+<rect width="1420" height="610" rx="18" fill="url(#bg)"/>
+<rect x=".5" y=".5" width="1419" height="609" rx="18" fill="none" stroke="#24415c"/>
+<text x="36" y="44" font-size="22" font-weight="700" fill="#f1f5f9">Pipeline architecture</text>
+<text x="36" y="66" font-size="13" fill="#94a3b8">One leakage-safe protocol · two trials · results served by a dashboard</text>
+<rect x="1174" y="26" width="210" height="30" rx="15" fill="#0f2a3d" stroke="#2dd4bf" stroke-opacity=".5"/>
+<g transform="translate(1188,33)" fill="none" stroke="#5eead4" stroke-width="1.8"><rect x="0" y="6" width="12" height="9" rx="2"/><path d="M3 6V4a3 3 0 016 0v2"/></g>
+<text x="1213" y="46" font-size="12.5" font-weight="600" fill="#5eead4">Test set opened once</text>
+<text x="115.0" y="86" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1.6" fill="#64829e">DATA</text>
+<text x="345.0" y="86" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1.6" fill="#64829e">PREPARE</text>
+<text x="575.0" y="86" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1.6" fill="#64829e">SPLIT</text>
+<text x="805.0" y="86" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1.6" fill="#64829e">ANALYSE</text>
+<text x="1035.0" y="86" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1.6" fill="#64829e">PREDICT · VALIDATE</text>
+<text x="1285.0" y="86" text-anchor="middle" font-size="11" font-weight="700" letter-spacing="1.6" fill="#64829e">DELIVER</text>
+<path id="p_raw" class="base" d="M200 285 C230 285 230 285 260 285"/>
+<path class="edge" d="M200 285 C230 285 230 285 260 285" marker-end="url(#ar)" style="animation-delay:0.00s"/>
+<circle r="4.2" fill="#fff" filter="url(#glow)"><animateMotion dur="2.6s" begin="0.90s" repeatCount="indefinite" rotate="auto"><mpath href="#p_raw"/></animateMotion></circle>
+<path id="p_clean" class="base" d="M345 245 L345 175"/>
+<path class="edge" d="M345 245 L345 175" marker-end="url(#ar)" style="animation-delay:0.13s"/>
+<circle r="4.2" fill="#fff" filter="url(#glow)"><animateMotion dur="3.0s" begin="1.25s" repeatCount="indefinite" rotate="auto"><mpath href="#p_clean"/></animateMotion></circle>
+<path id="p_c2f" class="base" d="M430 285 C460 285 460 285 490 285"/>
+<path class="edge" d="M430 285 C460 285 460 285 490 285" marker-end="url(#ar)" style="animation-delay:0.26s"/>
+<circle r="4.2" fill="#fff" filter="url(#glow)"><animateMotion dur="3.4s" begin="1.60s" repeatCount="indefinite" rotate="auto"><mpath href="#p_c2f"/></animateMotion></circle>
+<path id="p_f2e" class="base" d="M660 285 C690 285 690 135 720 135"/>
+<path class="edge" d="M660 285 C690 285 690 135 720 135" marker-end="url(#ar)" style="animation-delay:0.39s"/>
+<circle r="4.2" fill="#fff" filter="url(#glow)"><animateMotion dur="2.6s" begin="1.95s" repeatCount="indefinite" rotate="auto"><mpath href="#p_f2e"/></animateMotion></circle>
+<path id="p_f2m" class="base" d="M660 285 C690 285 690 285 720 285"/>
+<path class="edge" d="M660 285 C690 285 690 285 720 285" marker-end="url(#ar)" style="animation-delay:0.52s"/>
+<circle r="4.2" fill="#fff" filter="url(#glow)"><animateMotion dur="3.0s" begin="2.30s" repeatCount="indefinite" rotate="auto"><mpath href="#p_f2m"/></animateMotion></circle>
+<path id="p_f2c" class="base" d="M660 285 C690 285 690 435 720 435"/>
+<path class="edge" d="M660 285 C690 285 690 435 720 435" marker-end="url(#ar)" style="animation-delay:0.65s"/>
+<circle r="4.2" fill="#fff" filter="url(#glow)"><animateMotion dur="3.4s" begin="2.65s" repeatCount="indefinite" rotate="auto"><mpath href="#p_f2c"/></animateMotion></circle>
+<path id="p_m2p" class="base" d="M890 285 C920 285 920 285 950 285"/>
+<path class="edge" d="M890 285 C920 285 920 285 950 285" marker-end="url(#ar)" style="animation-delay:0.78s"/>
+<circle r="4.2" fill="#fff" filter="url(#glow)"><animateMotion dur="2.6s" begin="3.00s" repeatCount="indefinite" rotate="auto"><mpath href="#p_m2p"/></animateMotion></circle>
+<path id="p_c2v" class="base" d="M890 435 C920 435 920 435 950 435"/>
+<path class="edge" d="M890 435 C920 435 920 435 950 435" marker-end="url(#ar)" style="animation-delay:0.91s"/>
+<circle r="4.2" fill="#fff" filter="url(#glow)"><animateMotion dur="3.0s" begin="3.35s" repeatCount="indefinite" rotate="auto"><mpath href="#p_c2v"/></animateMotion></circle>
+<path id="p_e2d" class="base" d="M890 135 C1035 135 1035 170 1180 170"/>
+<path class="edge" d="M890 135 C1035 135 1035 170 1180 170" marker-end="url(#ar)" style="animation-delay:1.04s"/>
+<circle r="4.2" fill="#fff" filter="url(#glow)"><animateMotion dur="3.4s" begin="3.70s" repeatCount="indefinite" rotate="auto"><mpath href="#p_e2d"/></animateMotion></circle>
+<path id="p_p2d" class="base" d="M1120 285 C1150 285 1150 285 1180 285"/>
+<path class="edge" d="M1120 285 C1150 285 1150 285 1180 285" marker-end="url(#ar)" style="animation-delay:1.17s"/>
+<circle r="4.2" fill="#fff" filter="url(#glow)"><animateMotion dur="2.6s" begin="4.05s" repeatCount="indefinite" rotate="auto"><mpath href="#p_p2d"/></animateMotion></circle>
+<path id="p_v2d" class="base" d="M1120 435 C1150 435 1150 400 1180 400"/>
+<path class="edge" d="M1120 435 C1150 435 1150 400 1180 400" marker-end="url(#ar)" style="animation-delay:1.30s"/>
+<circle r="4.2" fill="#fff" filter="url(#glow)"><animateMotion dur="3.0s" begin="4.40s" repeatCount="indefinite" rotate="auto"><mpath href="#p_v2d"/></animateMotion></circle>
+<g class="node" style="animation-delay:0.10s" filter="url(#sh)">
+<rect x="30" y="245" width="170" height="80" rx="12" fill="#12263b" stroke="#2c4d6b"/>
+<rect x="30" y="245" width="5" height="80" rx="2.5" fill="url(#acc)"/>
+<circle cx="57" cy="271" r="12" fill="#0f766e"/><text x="57" y="276" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">1</text>
+<text x="77" y="275" font-size="13" font-weight="700" fill="#f1f5f9">Raw data</text>
+<text x="48" y="297" font-size="12" fill="#5eead4" font-family="Consolas, Menlo, monospace">ACTG 175 · GBSG2</text>
+<text x="48" y="314" font-size="11.5" fill="#94a3b8">Two public trials</text>
+</g>
+<g class="node" style="animation-delay:0.22s" filter="url(#sh)">
+<rect x="260" y="245" width="170" height="80" rx="12" fill="#12263b" stroke="#2c4d6b"/>
+<rect x="260" y="245" width="5" height="80" rx="2.5" fill="url(#acc)"/>
+<circle cx="287" cy="271" r="12" fill="#0f766e"/><text x="287" y="276" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">2</text>
+<text x="307" y="275" font-size="13" font-weight="700" fill="#f1f5f9">Clean and audit</text>
+<text x="278" y="297" font-size="12" fill="#5eead4" font-family="Consolas, Menlo, monospace">cleaning.py</text>
+<text x="278" y="314" font-size="11.5" fill="#94a3b8">Leakage columns removed</text>
+</g>
+<g class="node" style="animation-delay:0.34s" filter="url(#sh)">
+<rect x="260" y="95" width="170" height="80" rx="12" fill="#12263b" stroke="#2c4d6b"/>
+<rect x="260" y="95" width="5" height="80" rx="2.5" fill="url(#acc)"/>
+<circle cx="287" cy="121" r="12" fill="#0f766e"/><text x="287" y="126" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">3</text>
+<text x="307" y="125" font-size="13" font-weight="700" fill="#f1f5f9">EDA</text>
+<text x="278" y="147" font-size="12" fill="#5eead4" font-family="Consolas, Menlo, monospace">eda.py</text>
+<text x="278" y="164" font-size="11.5" fill="#94a3b8">Balance, censoring, KM</text>
+</g>
+<g class="node" style="animation-delay:0.46s" filter="url(#sh)">
+<rect x="490" y="245" width="170" height="80" rx="12" fill="#12263b" stroke="#2c4d6b"/>
+<rect x="490" y="245" width="5" height="80" rx="2.5" fill="url(#acc)"/>
+<circle cx="517" cy="271" r="12" fill="#0f766e"/><text x="517" y="276" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">4</text>
+<text x="537" y="275" font-size="13" font-weight="700" fill="#f1f5f9">Feature engineering</text>
+<text x="508" y="297" font-size="12" fill="#5eead4" font-family="Consolas, Menlo, monospace">features.py</text>
+<text x="508" y="314" font-size="11.5" fill="#94a3b8">Train / test split first</text>
+</g>
+<g class="node" style="animation-delay:0.58s" filter="url(#sh)">
+<rect x="720" y="95" width="170" height="80" rx="12" fill="#12263b" stroke="#2c4d6b"/>
+<rect x="720" y="95" width="5" height="80" rx="2.5" fill="url(#acc)"/>
+<circle cx="747" cy="121" r="12" fill="#0f766e"/><text x="747" y="126" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">5</text>
+<text x="767" y="125" font-size="13" font-weight="700" fill="#f1f5f9">Treatment effect</text>
+<text x="738" y="147" font-size="12" fill="#5eead4" font-family="Consolas, Menlo, monospace">effects.py</text>
+<text x="738" y="164" font-size="11.5" fill="#94a3b8">HR · RMST · NNT</text>
+</g>
+<g class="node" style="animation-delay:0.70s" filter="url(#sh)">
+<rect x="720" y="245" width="170" height="80" rx="12" fill="#12263b" stroke="#2c4d6b"/>
+<rect x="720" y="245" width="5" height="80" rx="2.5" fill="url(#acc)"/>
+<circle cx="747" cy="271" r="12" fill="#0f766e"/><text x="747" y="276" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">6</text>
+<text x="767" y="275" font-size="13" font-weight="700" fill="#f1f5f9">Prediction models</text>
+<text x="738" y="297" font-size="12" fill="#5eead4" font-family="Consolas, Menlo, monospace">models.py</text>
+<text x="738" y="314" font-size="11.5" fill="#94a3b8">Cox · RSF · GBM</text>
+</g>
+<g class="node" style="animation-delay:0.82s" filter="url(#sh)">
+<rect x="720" y="395" width="170" height="80" rx="12" fill="#12263b" stroke="#2c4d6b"/>
+<rect x="720" y="395" width="5" height="80" rx="2.5" fill="url(#acc)"/>
+<circle cx="747" cy="421" r="12" fill="#0f766e"/><text x="747" y="426" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">7</text>
+<text x="767" y="425" font-size="13" font-weight="700" fill="#f1f5f9">Heterogeneity</text>
+<text x="738" y="447" font-size="12" fill="#5eead4" font-family="Consolas, Menlo, monospace">cate.py</text>
+<text x="738" y="464" font-size="11.5" fill="#94a3b8">5 CATE learners</text>
+</g>
+<g class="node" style="animation-delay:0.94s" filter="url(#sh)">
+<rect x="950" y="245" width="170" height="80" rx="12" fill="#12263b" stroke="#2c4d6b"/>
+<rect x="950" y="245" width="5" height="80" rx="2.5" fill="url(#acc)"/>
+<circle cx="977" cy="271" r="12" fill="#0f766e"/><text x="977" y="276" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">8</text>
+<text x="997" y="275" font-size="13" font-weight="700" fill="#f1f5f9">Patient predictor</text>
+<text x="968" y="297" font-size="12" fill="#5eead4" font-family="Consolas, Menlo, monospace">predictor.py</text>
+<text x="968" y="314" font-size="11.5" fill="#94a3b8">Ridge Cox per trial</text>
+</g>
+<g class="node" style="animation-delay:1.06s" filter="url(#sh)">
+<rect x="950" y="395" width="170" height="80" rx="12" fill="#12263b" stroke="#2c4d6b"/>
+<rect x="950" y="395" width="5" height="80" rx="2.5" fill="url(#acc)"/>
+<circle cx="977" cy="421" r="12" fill="#0f766e"/><text x="977" y="426" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">9</text>
+<text x="997" y="425" font-size="13" font-weight="700" fill="#f1f5f9">Validation</text>
+<text x="968" y="447" font-size="12" fill="#5eead4" font-family="Consolas, Menlo, monospace">validation.py</text>
+<text x="968" y="464" font-size="11.5" fill="#94a3b8">Calibration · global null</text>
+</g>
+<g class="node" style="animation-delay:1.4s" filter="url(#sh)">
+<rect class="ring" x="1180" y="110" width="210" height="350" rx="16" fill="none" stroke="#2dd4bf" stroke-width="2"/>
+<g class="pulse"><rect x="1180" y="110" width="210" height="350" rx="16" fill="url(#dash)" stroke="#5eead4" stroke-opacity=".6"/></g>
+<text x="1285.0" y="154" text-anchor="middle" font-size="18" font-weight="700" fill="#fff">Dashboard</text>
+<text x="1285.0" y="176" text-anchor="middle" font-size="12" fill="#ccfbf1">6 pages · light and dark</text>
+<text x="1285.0" y="210" text-anchor="middle" font-size="12" fill="#e2fbf6">Effects · Models</text>
+<text x="1285.0" y="230" text-anchor="middle" font-size="12" fill="#e2fbf6">Heterogeneity · Predictor</text>
+<text x="1285.0" y="250" text-anchor="middle" font-size="12" fill="#e2fbf6">Figure gallery</text>
+<rect x="1198" y="320" width="174" height="50" rx="10" fill="#0b1526" fill-opacity=".55"/>
+<text x="1285.0" y="342" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">FastAPI server</text>
+<text x="1285.0" y="360" text-anchor="middle" font-size="11.5" fill="#99f6e4" font-family="Consolas, Menlo, monospace">app/main.py</text>
+<rect x="1198" y="382" width="174" height="50" rx="10" fill="#0b1526" fill-opacity=".55"/>
+<text x="1285.0" y="404" text-anchor="middle" font-size="13" font-weight="600" fill="#fff">Static site · Vercel</text>
+<text x="1285.0" y="422" text-anchor="middle" font-size="11.5" fill="#99f6e4" font-family="Consolas, Menlo, monospace">web/ · live demo</text>
+</g>
+<g class="node" style="animation-delay:1.6s">
+<rect class="band" x="30" y="515" width="1360" height="62" rx="14" fill="#0f2a3d" fill-opacity=".7" stroke="#38bdf8" stroke-opacity=".7"/>
+<circle cx="64" cy="546" r="12" fill="#0369a1"/><text x="64" y="551" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">10</text>
+<text x="88" y="541" font-size="14" font-weight="700" fill="#f1f5f9">Replication on a second trial</text>
+<text x="88" y="561" font-size="12" fill="#94a3b8"><tspan fill="#7dd3fc" font-family="Consolas, Menlo, monospace">gbsg2.py</tspan>  runs the same protocol on GBSG2: propensity-adjusted effects, models, CATE and validation</text>
+</g>
 </svg>

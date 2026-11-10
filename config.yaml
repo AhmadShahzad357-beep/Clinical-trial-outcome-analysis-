@@ -13,7 +13,7 @@ paths:
   tables: results/tables
   figures: results/figures
 
-# Dashboard links. Fill these in after publishing to GitHub.
+# Dashboard links. Update live_demo_url if your Vercel project has a different address.
 # live_demo_url can also be set with the LIVE_DEMO_URL environment variable.
-live_demo_url: ""
-repo_url: ""
+live_demo_url: "https://clinical-trial-outcome-analysis.vercel.app"
+repo_url: "https://github.com/AhmadShahzad357-beep/Clinical-trial-outcome-analysis-"
